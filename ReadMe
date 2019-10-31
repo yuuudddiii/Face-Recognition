@@ -1,0 +1,86 @@
+
+
+_______________FACE RECOGNITION USING OPENCV & Python WITH FACE_RECOGNITION AND DLIB:______________
+
+
+>>>>>>>>>>>>		Python modules required:		<<<<<<<<<<<<<
+
+- dlib
+
+neural network trained to identify faces in images on a dataset of ~3 million images and reaching 99.38% accuracy. Trained by Davis King using Labeled Faces in the Wild (LFW) dataset. See how here:
+http://blog.dlib.net/2017/02/high-quality-face-recognition-with-deep.html
+
+- face_recognition
+
+Python's simplest face recognition library that recognizes and manipulates faces using dlib's face recognition network. Made by Adam Getigey. See his article here:
+https://medium.com/@ageitgey/machine-learning-is-fun-part-4-modern-face-recognition-with-deep-learning-c3cffc121d78
+
+- imutils
+
+a library of convenience functions that makes it easier to encode facial data and read them etc. Made by Adrian Rosebrock. It can be found here : https://github.com/jrosebr1/imutils
+
+- OpenCV
+
+Open source computer vision and machine learning software library. We mostly use the cv2 class from OpenCV.
+Read more at:  https://opencv.org/about.html 
+
+
+>>>>>>>>>>>		Face Recognition Logic Process:			<<<<<<<<<<<<
+
+- Introducing new faces to list of known faces:
+
+1) Identify the location of the face in an image using Histogram of Oriented Gradients (HOG) or Convolutional Neural Networks (CNN).
+
+2) Identify the facial features required for encoding using deep-metric learning resulting in a 128-d vector that is unique to every face. Train the model to tweak the weights to make the vector more unique, to increase accuracy, by using more images. Store the data on disk for future use.
+
+- Recognizing faces in media input:
+
+1) Identify the location of the face in an image using HOG or CNN (videos are fed in frame by frame, ideally simulating continuous image input)
+
+2) Obtain the encodings of the facial features and compare the encodings to those of known faces.
+
+3) If the encodings match the face belongs to the person associated with those encodings in list of known faces. Else, the face is labelled as unkown.
+
+4) If the image does not contain a face, nothing is displayed.
+
+
+>>>>>>	This folder contains the following python files for the various purposes:	<<<<<<
+
+- encode_faces.py :
+	add new facial encodings to an already existing list of encodings or to a new list of 		encodings.
+
+- recognize_faces_image.py :
+	pass in an image with a face to be identified and outputs the same image with the face 		detected and identified with a green box and the associated name. 'Unknown' is displayed 		if the face is not recognized.
+
+- recognize_faces_video_file.py :
+	pass in a video file and ouputs the same video with a green box on any face that is 		identified in the video with the associated name. 'Unknown' is displayed if the face is 	not recognized
+
+- recognize_faces_video.py : 
+	opens up the JetsonTX2 on-board camera to allow live video facial recognition. Any face 	that appears in the video feed will be identified and a name displayed with a green box 	around the face. 'Unkown' is displayed if the face is not recognized. To change the camera 		to be used, change the value of the variable 'src' in line 36 to the path of the desired 		camera. Usually if it is a system camera (like a webcam), replacing it with src=0 will 		result in the first available camera being used.
+
+Further explanation of these python files (arguments to pass etc.) can be found in their code.
+
+
+>>>>>> This folder also contains peripheral folders/files <<<<<<
+
+- dataset :
+	the example structure of the dataset folder for creating facial encodings. 
+
+- examples : 
+	example images to use to see the example output of recognize_faces_image.py using 		encodings.pickle encodings.
+
+- videos :
+	example video to use to see the example output of recognize_faces_video_file.py using 		encodings.pickle encodings.
+
+- output :
+	example of an output of recognize_faces_video_file.py.
+
+- encodings.pickle :
+	contains facial encodings of the names in the dataset folder. THIS .pickle FILE WAS ENCODED IN PYTHON 3 AND CAN ONLY BE RUN ON PYTHON 3. ON UBUNTU: 
+
+$ alias python=python3
+
+BEFORE USING THE .PICKLE FILE. Subsequent .pickle files will be in Python 2 if no protocol is declared in which, by default, none is.
+
+- ReadMe :
+	this is the file you are currently reading :)
